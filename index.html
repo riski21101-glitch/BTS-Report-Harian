@@ -251,8 +251,7 @@ function pillOk(){
 function stopIds(){ return [...document.querySelectorAll('.stop')].map(el=>+el.id.split('-')[1]); }
 function rekal(){
   let p=0,m=0,b=0;
-  const ids=stopIds();
-  ids.slice(1).forEach(i=>{ // skip stop pertama (CGKG/HUB)
+  stopIds().forEach(i=>{
     p+=+($(`sp-${i}`)?.value||0);
     m+=+($(`sm-${i}`)?.value||0);
     b+=+($(`sb-${i}`)?.value||0);
@@ -509,9 +508,9 @@ function salin(wa=false){
   });
 
   const allIds=stopIds();
-  const tp=allIds.slice(1).reduce((a,i)=>a+ +($(`sp-${i}`)?.value||0),0);
-  const tm=allIds.slice(1).reduce((a,i)=>a+ +($(`sm-${i}`)?.value||0),0);
-  const tb=allIds.slice(1).reduce((a,i)=>a+ +($(`sb-${i}`)?.value||0),0);
+  const tp=allIds.reduce((a,i)=>a+ +($(`sp-${i}`)?.value||0),0);
+  const tm=allIds.reduce((a,i)=>a+ +($(`sm-${i}`)?.value||0),0);
+  const tb=allIds.reduce((a,i)=>a+ +($(`sb-${i}`)?.value||0),0);
   txt+=`*Total Bulky Reguler : ${tp}*\n*Total MB : ${tm}*\n*Total BP : ${tb}±*\n`;
   if($('f-noted').value) txt+=`\n*NOTED*\n\n*- ${$('f-noted').value}*\n`;
   txt+=`\nTiba di HUB : ${hub}`;
